@@ -1,2 +1,2 @@
-# utnPay
+# utnPayApps
 Billetera Universitaria
