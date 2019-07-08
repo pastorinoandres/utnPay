@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "screens"
+		},
+		{
+			"path": "styles"
+		},
+		{
+			"path": "state\\data"
+		}
+	]
+}
