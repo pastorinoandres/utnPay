@@ -26,6 +26,7 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": ""
+    "description": "App para gestionar todos los pagos virtuales en la Universidad Tecnológica Nacional, Regional La Plata\nPrimer objetivo: Evolucionar el pago del estacionamiento.",
+    "githubUrl": "https://github.com/pastorinoandres/utnPayApps/tree/master/utnPay"
   }
 }

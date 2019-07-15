@@ -99,7 +99,7 @@ export default handleActions(
       [CLEAR_HISTORY]: clearHistoryReducer,
       [INITIAL_SETUP]: initialSetupReducer
     },
-    []
+    history
 );
 
 // HISTORY: arreglo de transacciones

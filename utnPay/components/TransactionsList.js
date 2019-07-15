@@ -19,7 +19,7 @@ class TransactionsList extends Component{
         const title = 'Transacción exitosa';
         const detail = `Se registro un pago de $${lastTransaction.precio} referente a ${lastTransaction.category}`;
 
-        if(history.length){
+        if(history.length ===1){
             showNotification(title,detail,1500)    
         }       
     }

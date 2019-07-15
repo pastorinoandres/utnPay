@@ -16,7 +16,7 @@ export class User {
         this.PASSWORD = password;
         this.SALDO = saldo;
         this.PHOTO = photo;
-        this.GIFT = true; //disponibilidad de regalo
+        this.GIFT = false //disponibilidad de regalo
 
         if (legajo){
             this.legajo = legajo;
@@ -34,7 +34,7 @@ const user = new User(
     'pastorinoandres@outlook.com', 
     '*******', 
     '24708',
-    15,
+    400,
     require('./../../assets/images/photo.jpg')
 );
 
