@@ -23,16 +23,27 @@ import {
 
 class Header extends Component {
     render() {
+        const {showModal , saldo} = this.props;
         return (
             <View style={_header}>                
 
-                <View style={_segundaLinea}>
-                    <Text style={_subTitular}>Te quedan </Text>
-                    <Text style={_bigNumber}>$400</Text>
-                </View>
+                
+                    {(saldo)?(
+                        <View style={_segundaLinea}>
+                            <Text style={_subTitular}>Te quedan </Text>
+                            <Text style={_bigNumber}>{`$${saldo}`}</Text>
+                        </View>
+                    ):(
+                        <View style={_segundaLinea}>
+                            <Text style={_subTitular}>No posees fondos </Text>
+                            <Text style={_bigNumber}>{`:(`}</Text>
+                        </View>
+                    )}
+                    
+                
 
                 <View style={_terceraLinea}>
-                    <TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={()=>{showModal()}}>
                         <Text style={_link}>cargar crédito</Text>
                     </TouchableWithoutFeedback>
                 </View>

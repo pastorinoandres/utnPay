@@ -13,8 +13,9 @@ import {
 } from "../styles/globalStyles";
 
 
-const ServicesList = ({services}) =>{
+const ServicesList = ({services, showNotification, chargedCreditToday}) =>{
 
+    
     const list = services.map((service,index)=>{
 
         return (
@@ -23,8 +24,11 @@ const ServicesList = ({services}) =>{
                 icon={service.icon} 
                 name={service.name} 
                 screenName={service.screenName} 
-                enabled={service.enabled} />
-                )
+                enabled={service.enabled}
+                showNotification={showNotification}
+                chargedCreditToday={chargedCreditToday}
+            />
+        )
     })
 
     

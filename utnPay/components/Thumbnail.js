@@ -1,5 +1,9 @@
+
+//dependecies
 import React from 'react';
-import { View , Text, TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
+
+//styles
 import { _small, _medium, _big, _border } from './../styles/globalStyles';
 
 

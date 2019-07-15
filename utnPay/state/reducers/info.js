@@ -2,26 +2,21 @@
 import { handleActions } from 'redux-actions';
 
 //constants
-import {
-
-    SET_TYPE_USER,
-    SET_FULL_NAME,
-    SET_ALIAS,
-    SET_EMAIL,
-    SET_PASSWORD,
-    SET_LEGAJO 
-
-} from '../constants';
+import { DESCONTAR, INITIAL_SETUP, RESET_BALANCE, USE_CREDIT } from '../constants';
 
 
 export class User {
-    constructor(typeUser= 'alumno', fullName = '', alias = '', email = '', password = '', legajo = null){
+    constructor(dni,typeUser= 'alumno', fullName = '', alias = '', email = '', password = '', legajo = null, saldo, photo){
 
+        this.DNI = dni
         this.TYPE_USER = typeUser;
         this.FULL_NAME = fullName;
         this.ALIAS = alias;
         this.EMAIL = email;
         this.PASSWORD = password;
+        this.SALDO = saldo;
+        this.PHOTO = photo;
+        this.GIFT = true; //disponibilidad de regalo
 
         if (legajo){
             this.legajo = legajo;
@@ -30,15 +25,47 @@ export class User {
     }
 }
 
-const user = new User();
+//default data
+const user = new User(
+    37218703,
+    'alumno', 
+    'Andres Pastorino', 
+    'Andres', 
+    'pastorinoandres@outlook.com', 
+    '*******', 
+    '24708',
+    15,
+    require('./../../assets/images/photo.jpg')
+);
+
+const descontarSaldoReducer = (state,action) => {
+    const saldoResultante = state.SALDO - action.payload
+    return {...state, SALDO:saldoResultante};
+}
+
+const resetBalanceReducer = (state) => {
+    return {...state, SALDO:15, GIFT:true};
+}
+
+const initialSetupReducer = (state) => {
+    return {...state, SALDO:400};
+}
+
+const useCreditReducer = (state) => {
+    return {...state, GIFT:false};
+}
+
+
+
+
+
 export default handleActions(
     {      
-      [SET_TYPE_USER]: (state) => state,
-      [SET_FULL_NAME]: (state) => state,
-      [SET_ALIAS]: (state) => state,
-      [SET_EMAIL]: (state) => state,
-      [SET_PASSWORD]: (state) => state,
-      [SET_LEGAJO]: (state) => state,
+      [DESCONTAR]: descontarSaldoReducer,
+      [RESET_BALANCE]: resetBalanceReducer,
+      [INITIAL_SETUP]: initialSetupReducer,
+      [USE_CREDIT]: useCreditReducer
+    
     },
     user
 );

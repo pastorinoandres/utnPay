@@ -5,16 +5,21 @@ import { handleActions } from 'redux-actions';
 //constants
 import { ADD_CAR, EDIT_CAR, DELETE_CAR } from '../constants';
 
-export class Car {
-    constructor(dominio = '', marca = '', modelo = '', color = ''){
-
-        this.DOMINIO = dominio;
-        this.MARCA = marca;
-        this.MODELO = modelo;
-        this.COLOR= color;
-        
+//default data
+const cars = [
+    {
+        marca:"Peugeot",
+        modelo: "208",
+        color: "Azul",
+        dominio: "MWU131"
+    },
+    {
+        marca:"Peugeot",
+        modelo: "Partner",
+        color: "Rojo",
+        dominio: "AA985QU"
     }
-}
+]
 
 export default handleActions(
     {      
@@ -22,5 +27,5 @@ export default handleActions(
       [EDIT_CAR]: (state) => state,
       [DELETE_CAR]: (state) => state,
     },
-    []
+    cars
 );

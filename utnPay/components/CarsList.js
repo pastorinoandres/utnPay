@@ -1,23 +1,49 @@
 
 //dependecies
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 
 //components
 import CarItem from "./CarItem"
+import CarItemEmpty from "./CarItemEmpty"
 
-//styles ..
-import {
-    _listCar
-} from "../styles/globalStyles";
+//styles
+import {_listCar } from "../styles/globalStyles";
 
-const CarsList = ({cars}) => {
+const CarsList = ({cars, addItem=true, selectCar, setSelectCar, doTransaction}) => {
 
-    let list = cars.map((car)=>{
-        return (<CarItem key={`${car.dominio}`} car={car}/>)
-    })
     
-    list.push(<CarItem key={`emply`} car={null}/>)
+            
+    let list = cars.map((car)=>{
+
+        let _opaque;
+           
+        if(car.dominio !== selectCar){
+            _opaque = true
+        }
+
+        if(selectCar){
+            return (
+                <CarItem 
+                    key={`${car.dominio}`} 
+                    car={car} 
+                    _opaque={_opaque}
+                    setSelectCar={setSelectCar}
+                    doTransaction={doTransaction}
+                />);
+        }else{
+            return (
+                <CarItem 
+                    key={`${car.dominio}`} 
+                    car={car}
+                />)
+        }                
+        
+    })
+  
+    if(addItem){
+        list.push(<CarItemEmpty key={`emply`} car={null}/>)
+    }
 
     return(
         <View style={_listCar}>

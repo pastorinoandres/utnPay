@@ -19,6 +19,7 @@
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-camera": "^2.11.0",
+    "react-native-easy-toast": "^1.2.0",
     "react-native-permissions": "^1.1.1",
     "react-native-qrcode": "^0.2.7",
     "react-native-qrcode-scanner": "^1.2.1",
@@ -29,6 +30,7 @@
     "redux-actions": "^2.6.5",
     "redux-form": "^8.2.4",
     "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "styled-components": "^4.3.2"
   },

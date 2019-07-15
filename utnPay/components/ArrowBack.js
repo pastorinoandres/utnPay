@@ -1,7 +1,11 @@
+
+//dependecies
 import React from 'react';
 import { TouchableOpacity, View, Platform } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
+
+//styles
 import { _tochedZone } from './../styles/globalStyles';
 
 const ArrowBack = (props) => {

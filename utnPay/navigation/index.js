@@ -1,14 +1,14 @@
+//info: Apartado de configuración donde diseña la navegación de la app con React Navigation
 
 //dependecies
 import { createStackNavigator } from 'react-navigation';
 
 //constants
-import { HOME, PROFILE, TRANSACTION, SHOW_QR } from './constants' ;
+import { HOME, PROFILE, SHOW_QR } from './constants' ;
 
 //screens
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from './../screens/ProfileScreen';
-// import TransactionScreen from '../screens/TransactionScreen';
 import ShowQRScreen from './../screens/ShowQRScreen';
 
 

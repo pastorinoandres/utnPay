@@ -1,3 +1,4 @@
+
 //dependecies
 import React from 'react';
 import { View , Text } from 'react-native';
@@ -13,14 +14,14 @@ import {
     _primerLinea
 } from "../styles/globalStyles";
 
-const HeaderFixed = ({goToProfile}) => {
+const HeaderFixed = ({goToProfile, alias, photo}) => {
     return (
         <View style={[_headerFixed, _primerLinea]}>
             <View style={_space}></View>
-            <Text style={_titular}>Hola Andres!</Text> 
+            <Text style={_titular}>{`Hola ${alias}!`}</Text> 
             <Thumbnail
                 size="small"
-                source={require('../assets/images/photo.jpg')}
+                source={photo}
                 onPress={goToProfile}>
             </Thumbnail>
         </View>

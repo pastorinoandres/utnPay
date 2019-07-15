@@ -1,4 +1,11 @@
 
+//dependecies
+import { handleActions } from 'redux-actions';
+
+//constants
+import { ADD_SERVICES } from '../constants';
+
+//default data
 const services = [
     {
       name: 'Estacionamiento', 
@@ -19,4 +26,10 @@ const services = [
       enabled: false,
     },
   ];
-export default services
+
+export default handleActions(
+    {      
+      [ADD_SERVICES]: (state) => state,
+    },
+    services
+);

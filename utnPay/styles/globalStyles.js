@@ -1,28 +1,34 @@
 
-import { StyleSheet } from 'react-native';
-import { actual, iphoneSE, iphoneX, iphone8, iphoneXSMax, pixel, pixelXL } from './dispositivos'
+//dependecies
+import { StyleSheet, Dimensions } from 'react-native';
 
+const dimensiones = Dimensions.get('window');
 
-let activacionSimulador;
-let dispositivoElegido = iphoneXSMax;
-
-if(dispositivoElegido === iphoneXSMax){
-    activacionSimulador = false;
-}else{
-    activacionSimulador = true;
+const actual = {
+    width:dimensiones.width,
+    height:dimensiones.height,
+    aire: 20,
 }
 
 
-activacionSimulador = false;
+let dispositivoElegido = actual;
+
+let activacionSimulador = (dispositivoElegido === actual)? false: true
 export default activacionSimulador;
+
+
 const { width, height, aire} = dispositivoElegido;
  
 
 let prop1 = 220;
-let prop2 = 30; 
+let prop2 = 30;
+let prop3 = 120
+let prop4 = 30
 if (height > 740){
     prop1 = 250;
-    prop2 = 50;    
+    prop2 = 50;
+    prop3 = 220
+    prop4 = 120    
 }
 
 //constantes
@@ -118,6 +124,7 @@ const s = StyleSheet.create({
         textDecorationLine: "underline",
         textDecorationColor: "white",
         opacity: 0.8, 
+        padding:5
     },
     small:{
         width: 40,
@@ -230,6 +237,7 @@ const s = StyleSheet.create({
     },
     card: {
         flex:1,
+        minHeight:500,
         borderTopLeftRadius:20,
         borderTopRightRadius:20,
         backgroundColor: "#FFFFFF",
@@ -310,6 +318,18 @@ const s = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    closeButton:{
+        position:'absolute',
+        zIndex:10,
+        top:0,
+        right:0,
+        paddingHorizontal:aire,
+        paddingBottom:aire,
+        paddingTop:aire/2,
+        display: 'flex',        
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     titleSection:{
         color: '#4F4F4F',
         fontSize: 20,
@@ -323,7 +343,22 @@ const s = StyleSheet.create({
         height: 270,                
         borderRadius: 15,
         marginLeft:aire,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#FDFDFD",
+        display: 'flex'        
+    },
+    itemCarNoSelect:{        
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.18,
+        shadowRadius: 1.00,
+
+        elevation: 1,
+        
+    },
+    itemCarSelected:{
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -331,8 +366,7 @@ const s = StyleSheet.create({
         },
         shadowOpacity: 0.29,
         shadowRadius: 4.65,
-        elevation: 7,
-        display: 'flex',
+        elevation: 7,        
     },
     itemCarEmpty:{
         width: 200,
@@ -377,7 +411,7 @@ const s = StyleSheet.create({
         height: 300     
     },
     titleHeader:{
-        paddingTop:120,
+        paddingTop:prop4,
         padding: aire,
         textAlign: 'left'
     },
@@ -398,6 +432,30 @@ const s = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         marginVertical:40
+    },
+    darkLayer:{
+        flex:1, 
+        flexDirection: 'row', 
+        backgroundColor:'rgba(0, 0, 0, 0.7)', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        padding:aire
+    },
+    cardModal: {
+        flex:1,
+        height:500,        
+        paddingHorizontal:aire,
+        paddingVertical:20,
+        borderRadius:20,
+        backgroundColor: "#FFFFFF",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,        
     },
     dominioTxt:{
         fontSize:16,
@@ -422,7 +480,7 @@ const s = StyleSheet.create({
         width: width,
     },
     headerShowQr:{
-        height:220
+        height:prop3
     },
     subZonaVerde:{
         backgroundColor: verdeApp,
@@ -430,6 +488,30 @@ const s = StyleSheet.create({
         zIndex:-1,
         position:'absolute',
         height:300,
+    },
+    toast:{
+        display:"flex", 
+        width: width, 
+        height: 160, 
+        backgroundColor: 'transparent',
+        opacity:1,
+        padding:0,
+        padding:aire,
+    },
+    toastCard:{
+        flex:1,
+        padding:20, 
+        backgroundColor:'white',        
+        borderRadius:10,
+        alignItems:'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 8,
+        },
+        shadowOpacity: 0.7,
+        shadowRadius: 10.32,
+        elevation: 16,
     }
 
 });
@@ -480,6 +562,8 @@ export const _tochedZone = s.tochedZone;
 export const _simulador= s.simulador;
 export const _titleSection = s.titleSection;
 export const _itemCar = s.itemCar;
+export const _itemCarNoSelect = s.itemCarNoSelect;
+export const _itemCarSelected = s.itemCarSelected;
 export const _itemCarEmpty = s.itemCarEmpty;
 export const _headerCar = s.headerCar;
 export const _detailCar = s.detailCar;
@@ -494,4 +578,9 @@ export const _bgGrisClaroApp = s.bgGrisClaroApp;
 export const _headerFixed = s.headerFixed;
 export const _headerShowQr = s.headerShowQr;
 export const _subZonaVerde = s.subZonaVerde;
+export const _cardModal = s.cardModal;
+export const _darkLayer = s.darkLayer;
+export const _closeButton = s.closeButton;
+export const _toast = s.toast;
+export const _toastCard = s.toastCard;
 

@@ -1,5 +1,9 @@
+
+//dependecies
 import React from 'react';
 import { View, Text } from 'react-native';
+
+//styles
 import { _titleSection } from "./../styles/globalStyles";
 
 const Section = ({title, children}) => {

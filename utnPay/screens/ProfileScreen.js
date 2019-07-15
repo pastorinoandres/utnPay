@@ -1,8 +1,10 @@
 
+//info: Pantalla donde se provee la configuración del usuario, como el login, sus autos, etc 
+
 //dependecies
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 
 //components
 import Screen from './../components/Screen';
@@ -10,19 +12,20 @@ import HeaderProfile from './../components/HeaderProfile';
 import Section from './../components/Section';
 import SpaceSection from './../components/SpaceSection';
 import SettingOptions from "./../components/SettingOptions";
-
-
 import CarsList from "./../components/CarsList";
 
-//data
-import carsData from './../state/data/cars';
-import SettingsData from './../state/data/settings';
+//styles
 import { _bgGrisClaroApp } from '../styles/globalStyles';
+
+//selectors
+import { getFullName, getCars, getPhoto, getSettings } from '../state/selectors';
 
 
 
 
 class ProfileScreen extends Component {
+
+  //metodos
 
   goToBack= () =>{
     const { goBack } = this.props.navigation;
@@ -31,24 +34,24 @@ class ProfileScreen extends Component {
 
   render(){
 
+    const {cars,fullName,photo,settings} = this.props;
+
     return (
         <Screen _bgColor={_bgGrisClaroApp} goBack={true}>
 
-          <HeaderProfile/>
+          <HeaderProfile fullName={fullName} photo={photo}/>
 
           <View style={{backgroundColor : '#F2F2F2'}}>
 
             <Section title='Tus vehiculos'>
-              <CarsList cars={carsData}></CarsList>          
+              <CarsList cars={cars}></CarsList>          
             </Section>
 
             <SpaceSection/>
 
             <Section title='Configuración'>
-              <SettingOptions options={SettingsData}></SettingOptions>
-            </Section> 
-
-          
+              <SettingOptions options={settings}></SettingOptions>
+            </Section>          
 
           </View> 
 
@@ -62,18 +65,15 @@ class ProfileScreen extends Component {
 
 
 
-// const mapStateToProps = state => ({
-//   records: getRecords(state)
-// });
-
-// const mapDispatchToProps = {setCounterSelected, addAndSetCounter, getAndSet };
-
-
-const mapStateToProps = null;
-const mapDispatchToProps = null;
+const mapStateToProps = state => ({
+  photo: getPhoto(state),
+  fullName: getFullName(state),
+  cars: getCars(state),
+  settings: getSettings(state)
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(ProfileScreen);
 

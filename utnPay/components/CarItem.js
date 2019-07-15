@@ -1,6 +1,20 @@
+
+//dependecies
 import React from 'react';
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { _itemCar, _headerCar, _detailCar, _detailCarText, _iconService,_itemCarEmpty } from '../styles/globalStyles';
+
+
+//styles
+import { 
+    _itemCar, 
+    _itemCarNoSelect,
+    _headerCar, 
+    _detailCar, 
+    _detailCarText, 
+    _iconService, 
+    _itemCarEmpty, 
+    _itemCarSelected 
+} from '../styles/globalStyles';
 
 const colors = {
 
@@ -23,19 +37,39 @@ const colors = {
 
 
 
-const HeaderCar = ({color}) => {
+const HeaderCar = ({color, opaque}) => {
 
-    const background = StyleSheet.create({
+    
+
+    let background = StyleSheet.create({
 
         Color:{
             backgroundColor:colors[color]
         }}
         
     )
+
+
+
+    if(color==='Blanco'){
+
+        background = StyleSheet.create({
+
+            Color:{
+                backgroundColor:colors[color],
+                borderBottomColor:'#828282',
+                borderBottomWidth:1,
+                borderStyle:'solid'
+            }
+        },
+                        
+        )
+
+    }
     
-    let iconCar = require('./../assets/images/auto_white.png')
+    let iconCar = require('./../assets/images/car_white.png')
     if(color ==="Blanco"){
-        iconCar = require('./../assets/images/auto.png')
+        iconCar = require('./../assets/images/car.png')
     }
 
     return (
@@ -57,40 +91,40 @@ const DetailCar = ({marca, modelo, color, dominio}) => {
     );
 };
 
-const CarItem = ({car}) => {
 
-    if(car){
 
-        return (
+
+
+const CarItem = ({car, setSelectCar, _opaque, doTransaction})=>(
+        
+    <TouchableOpacity 
+        style={(_opaque)?[_itemCar, _itemCarNoSelect]:[_itemCar, _itemCarSelected]}
+        onPress = {()=>{
+            if(setSelectCar && _opaque){
+                setSelectCar(car.dominio)                
+            }
+        }}
+        onLongPress={doTransaction}
+    >
+        <View style={(_opaque)?{flex:1, opacity:0.4}:{flex:1}}>
+
+            <HeaderCar 
+                color={car.color}/>
+            <DetailCar 
+                marca={car.marca}
+                modelo={car.modelo}
+                color={car.color}
+                dominio={car.dominio}
+            />
             
-            <TouchableOpacity style={_itemCar}>
+        </View>
 
-                <HeaderCar color={car.color}></HeaderCar>
-                <DetailCar 
-                    marca={car.marca}
-                    modelo={car.modelo}
-                    color={car.color}
-                    dominio={car.dominio}
-                />
-                            
-            </TouchableOpacity>
-        );
+    </TouchableOpacity>
 
-    }else{
-
-        return(
-
-            <TouchableOpacity style={_itemCarEmpty}>
-
-                <Text style={_detailCarText}>Agrega otro vehiculo</Text>
-                        
-            </TouchableOpacity>
-        );
-
-    }
-};
+);
 
 export default CarItem;
+
 
 
 

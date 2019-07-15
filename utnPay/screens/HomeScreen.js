@@ -1,61 +1,116 @@
 
+//info: Pantalla principal donde se puede observar el historial de transacciones y saldo actual.
+//      De la misma se puede navegar al resto de las pantallas. 
+
 //dependecies
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import { View, ScrollView, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
-
-//constanst
-
-//data
-import servicesData from './../state/data/services';
-import historyData from './../state/data/history';
+import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 
 //components
+import Screen from './../components/Screen';
 import Header from "./../components/Header";
+import HeaderFixed from './../components/HeaderFixed';
 import ServicesList from "./../components/ServicesList";
 import TransactionsList from '../components/TransactionsList';
-import Screen from './../components/Screen';
-import ModalExample from "./../modals/ModalExample";
+import Welcome from "../components/Welcome";
 
-//Styles
-import { _screen, _bgVerdeApp, _bgGrisClaroApp } from "../styles/globalStyles";
-import { PROFILE } from '../navigation/constants';
-import Simulador from './../components/Simulador';
-import HeaderFixed from './../components/HeaderFixed';
-import { Fragment } from 'react';
+//styles
+import { _screen, _bgVerdeApp, _bgGrisClaroApp, _toast } from "../styles/globalStyles";
 
+//constants
+import { PROFILE, SHOW_QR } from '../navigation/constants';
+
+//modals
+import ChargeCreditModal from '../modals/ChargeCreditModal';
 
 //selectors
-
-//actions
-
-
+import { getHistory, getSaldo, getAlias, getPhoto, getServices, getAnswer, getGiftUsed } from '../state/selectors';
 
 
 
 class HomeScreen extends Component {
 
+  //metodos
 
+  constructor(){
+    super();
+    this.state={
+      visibility:false
+    }
+  }
+ 
   goToProfile = () =>{
     const { navigate } = this.props.navigation;
     navigate(PROFILE);
   }
 
-  HeaderFixedHome = ()=>(<HeaderFixed goToProfile={this.goToProfile}/>)
+  setVisibility = ()=>{
+    this.setState({visibility:!this.state.visibility})
+  }
 
-  render(){
+  //subcomponentes
+
+  HeaderFixedHome = ()=>(
+    <HeaderFixed 
+      goToProfile={this.goToProfile} 
+      alias={this.props.alias} 
+      photo={this.props.photo}/>)
+
+  
+  ContentScreen = ({showNotification})=>{
+
+    const {history, services, chargedCreditToday, saldo} = this.props;
+
+
+    if(history.length){
+
+      return (
+        <View style={_bgGrisClaroApp}>
+          <ServicesList services={services} showNotification={showNotification} chargedCreditToday={chargedCreditToday} ></ServicesList>
+          <TransactionsList history={history} saldo={saldo} showNotification={showNotification}></TransactionsList>
+        </View>
+      )
+
+    }else{
+
+      return (
+        <View style={{flex:1}}>
+
+          <ServicesList services={services} showNotification={showNotification} chargedCreditToday={chargedCreditToday} ></ServicesList>
+            <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate(SHOW_QR)}>                          
+              <View style={{flex:1, justifyContent: 'center', alignItems: 'center',paddingTop:100}}>  
+                <Image source={require('./../assets/images/empty.png')}/>
+                <Text style={{fontSize:20, color: 'white',fontWeight:'400',paddingTop:20,textAlign: 'center',color:'#4F4F4F'}}> Adquiere un servicio para verlo aqui</Text>       
+              </View>
+            </TouchableWithoutFeedback>        
+        </View>
+      )
+    }
 
     
+  }
+
+
+  render(){
+    
+    const { ContentScreen } = this;
+    const { saldo, history, giftUsed } = this.props;
+
+    
+    
+
+    if(!giftUsed){
+      return(<Welcome/>)
+    }
+
     return (
 
-      <Screen Header={this.HeaderFixedHome} _bgColor={_bgVerdeApp}>
+      <Screen Header={this.HeaderFixedHome} _bgColor={(history.length)?_bgVerdeApp:_bgGrisClaroApp} withToast={true} scrollable={history.length} >
                 
-        <Header></Header>
-        <View style={_bgGrisClaroApp}>
-          <ServicesList services={servicesData}></ServicesList>
-          <TransactionsList history={historyData}></TransactionsList>
-        </View>
-        
+        <Header showModal={this.setVisibility} saldo={saldo}></Header>        
+        <ContentScreen/>
+        <ChargeCreditModal visibility={this.state.visibility} setVisibility={this.setVisibility}/>          
                 
       </Screen>       
         
@@ -65,22 +120,19 @@ class HomeScreen extends Component {
 }
 
 
+const mapStateToProps = state => ({
+  history: getHistory(state),
+  chargedCreditToday:getAnswer(state),
+  saldo: getSaldo(state),
+  alias: getAlias(state),
+  photo: getPhoto(state),
+  services: getServices(state),
+  giftUsed: getGiftUsed(state)
+});
 
+export default connect(
+  mapStateToProps,
+  null,
+)(HomeScreen);
 
-// const mapStateToProps = state => ({
-//   records: getRecords(state)
-// });
-
-// const mapDispatchToProps = {setCounterSelected, addAndSetCounter, getAndSet };
-
-
-// const mapStateToProps = null;
-// const mapDispatchToProps = null;
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(HomeScreen);
-
-export default HomeScreen;
 
