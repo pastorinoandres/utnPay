@@ -1,6 +1,7 @@
 
 //dependecies
 import { combineReducers} from 'redux';
+import { reducer as form} from 'redux-form'
 
 //reducers
 import userId from './userId';
@@ -11,5 +12,5 @@ import services from './services';
 import settings from './settings';
 
 export default combineReducers({
-  userId, info, cars, history, services, settings
+  userId, info, cars, history, services, settings, form
 });

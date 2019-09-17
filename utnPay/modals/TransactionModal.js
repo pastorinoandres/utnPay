@@ -16,7 +16,7 @@ const Item = ({title, data})=>{
 
     return (
 
-        <View style={{justifyContent:'space-between',borderBottomColor:'828282',borderBottomWidth:'1',borderStyle:'solid',marginBottom:15}}> 
+        <View style={{justifyContent:'space-between',borderBottomColor:'828282',borderBottomWidth:1,borderStyle:'solid',marginBottom:15}}> 
             <Text
                 style={{fontSize:16,fontWeight: '400',color: '#4F4F4F', textAlign: 'left', paddingBottom:7}}>
                 {title}

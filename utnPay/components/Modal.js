@@ -1,26 +1,25 @@
 
 //dependecies
 import React from 'react';
-import { View, Modal } from 'react-native';
+import { View, TouchableWithoutFeedback, Modal as ModalRN  } from 'react-native';
 
 //styles
 import { _darkLayer } from "./../styles/globalStyles";
 
-const ChargeCreditModal = ({visibility = false, children}) => {
+const Modal = ({visibility = false, animationType='fade', onPressModalFn, dark=true, children}) => {
 
     const DarkLayer = View;
+    const TransparentLayer = (dark)?{}:{backgroundColor:'rgba(0, 0, 0, 0)'}
 
     return (
-        <Modal animationType="fade" transparent={true} visible={visibility}>
-
-          <DarkLayer style={_darkLayer}>
-
-            {children}
-
-          </DarkLayer>
-
-        </Modal>
+        <ModalRN animationType={animationType} transparent={true} visible={visibility}>
+          <TouchableWithoutFeedback onPress={onPressModalFn}>
+            <DarkLayer style={[_darkLayer,TransparentLayer]}>
+              {children}
+            </DarkLayer>
+          </TouchableWithoutFeedback>
+        </ModalRN>
     );
 };
 
-export default ChargeCreditModal;
+export default Modal;

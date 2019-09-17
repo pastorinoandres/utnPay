@@ -47,4 +47,21 @@ export const resetSetup = () => {
   }
 }
 
+// export const getAndSet = () => {
+
+//   return async (dispatch) => {    
+    
+//       try {
+//         dispatch(getCountersOfStorage());
+//         const data = await AsyncStorage.getItem(COUNTERS);
+//         if (data) {
+//           dispatch(setCountersInRedux(JSON.parse(data)))
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }    
+    
+//   }
+// }
+
 

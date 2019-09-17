@@ -39,6 +39,19 @@ class HomeScreen extends Component {
       visibility:false
     }
   }
+  
+  // async componentDidMount() {
+  //   setCountersInStorage = async (data) => {
+  //     try {
+  //       await AsyncStorage.setItem(COUNTERS,JSON.stringify(data));
+        
+  //     } catch (error) {
+  //       console.log(error);
+  //     }     
+      
+  //   }
+  // }
+  
  
   goToProfile = () =>{
     const { navigate } = this.props.navigation;

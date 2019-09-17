@@ -52,9 +52,13 @@ class Screen extends Component{
                 {(goBack)?<ArrowBack/>:null}
                 {(Header)?<Header/>:null}
                 <ContainerScreen style={[_screen, _bgColor]}>
-                    <ScrollView bounces={scrollable}>
-                        {contentScreen}
-                    </ScrollView>
+                    {
+                        (scrollable)
+                        ?<ScrollView bounces={scrollable}>
+                            {contentScreen}
+                        </ScrollView>
+                        : contentScreen
+                    }                    
                 </ContainerScreen>                    
             </Fragment>
         )

@@ -37,6 +37,7 @@ const grisClaroApp = '#E5E5E5';
 const verdeApp = '#27AE60';
 const amarilloApp = '#EB5757';
 const rojoApp = '#F2C94C';
+const facebook = '#2F80ED';
 
 
 const s = StyleSheet.create({
@@ -98,7 +99,8 @@ const s = StyleSheet.create({
         paddingBottom: 55
     },   
     screen: {
-        flex: 1       
+        flex: 1,
+        display: 'flex'   
     },
     titular:{
         color: 'white',
@@ -455,7 +457,8 @@ const s = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5,        
+        elevation: 5,
+        overflow:'hidden'        
     },
     dominioTxt:{
         fontSize:16,
@@ -474,6 +477,9 @@ const s = StyleSheet.create({
     },
     bgGrisClaroApp:{
         backgroundColor: grisClaroApp
+    },
+    bgFacebook:{
+        backgroundColor: facebook
     },
     headerFixed:{
         backgroundColor: verdeApp,
@@ -575,6 +581,7 @@ export const _dominioTxt = s.dominioTxt;
 export const _dominioLet = s.dominioLet;
 export const _bgVerdeApp = s.bgVerdeApp;
 export const _bgGrisClaroApp = s.bgGrisClaroApp;
+export const _bgFacebook = s.bgFacebook;
 export const _headerFixed = s.headerFixed;
 export const _headerShowQr = s.headerShowQr;
 export const _subZonaVerde = s.subZonaVerde;

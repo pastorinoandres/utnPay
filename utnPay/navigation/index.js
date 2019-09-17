@@ -4,12 +4,14 @@
 import { createStackNavigator } from 'react-navigation';
 
 //constants
-import { HOME, PROFILE, SHOW_QR } from './constants' ;
+import { HOME, PROFILE, SHOW_QR, SIGN_IN, REGISTER } from './constants' ;
 
 //screens
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from './../screens/ProfileScreen';
 import ShowQRScreen from './../screens/ShowQRScreen';
+import SignInScreen from './../screens/SignInScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 
 
 
@@ -17,10 +19,12 @@ export const Navigator = createStackNavigator(
     {
       [HOME]: HomeScreen,
       [PROFILE]: ProfileScreen,
-      [SHOW_QR]: ShowQRScreen
+      [SHOW_QR]: ShowQRScreen,
+      [SIGN_IN] : SignInScreen, 
+      [REGISTER]: RegisterScreen
     },
     {
-      initialRouteName: HOME,   
+      initialRouteName: SIGN_IN,   
       headerMode: 'none'
     },
   );
